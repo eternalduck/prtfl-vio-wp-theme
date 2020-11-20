@@ -1,0 +1,62 @@
+// styles for "Our Goal" section
+// it uses Template Name: Block: Block Centered
+// class is added to "page-class" acf field
+
+.front-goal {
+	// justify-content: center;
+	text-align: center;
+	& .common-block__content {
+		@include media-breakpoint-up("lg") {
+			padding-left: 8%;
+			text-align: left;
+		}
+	}
+	& .common-block__img {
+		@include media-breakpoint-down("sm") {
+			display: none;
+		}
+	}
+	& .common-block__bg_deep {
+		// position: relative;
+		&:before {//round white bg for text
+			content: "";
+			display: block;
+			position: absolute;
+			background: $white;
+			top: 50%;
+			left: 50%;
+			width: 600px;
+			height: 600px;
+			margin-top: -300px;
+			margin-left: -300px;
+			border-radius: 50%;
+			z-index: -1;
+			@include media-breakpoint-up("md") {
+				width: 760px;
+				height: 760px;
+				margin-top: -380px;
+				margin-left: -380px;
+			}
+			@include media-breakpoint-up("lg") {
+				width: 1000px;
+				height: 1000px;
+				margin-top: -450px;
+				margin-left: -500px;
+			}
+			@include media-breakpoint-up("xl") {
+				width: 1100px;
+				height: 1100px;
+				margin-top: -500px;
+				margin-left: -550px;
+			}
+		}//before
+	}//bg_deep
+	ul {
+		@include media-breakpoint-up("lg") {
+			width: 75%;
+		}
+	}
+	.common-block__bg_deep {
+		background-position: center center;
+	}
+}

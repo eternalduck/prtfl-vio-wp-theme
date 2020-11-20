@@ -1,0 +1,16 @@
+//styles for "What Do Portfolio Companies Get?" section
+// class is added to "page-class" acf field
+
+.front-get {
+	& .btn {
+		margin-top: 40px;
+		@include media-breakpoint-up("md") {
+			margin-top: 80px;
+		}
+	}
+	@include media-breakpoint-down("md") {
+		& .common-block__img {
+			display: none;
+		}
+	}
+}

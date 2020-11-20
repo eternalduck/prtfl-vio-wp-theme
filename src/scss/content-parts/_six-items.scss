@@ -1,0 +1,100 @@
+// styles for blocks with 6 items
+// in a row on XL, 
+// as 3x2 grid on LG-MD, and
+// as a slider on SM-down
+// add .slider class to a wp-group wrapping all items
+// Slick slider is used, see /js/slick-config.js
+// class is added to "page-class" acf field
+// You may use these classes if more tweaks are required:
+// .invest-boost for "Boost of Business Development" section,
+// .invest-benefits "Benefits of Smart Investments" section
+
+
+.six-items {
+	@include circle-bg-on-group;//item title bg circle
+	& h1 {
+		margin-bottom: 0;//with slider
+		@include media-breakpoint-up("md") {
+			text-align: center;
+			margin-bottom: 60px;
+		}
+		@include media-breakpoint-up("lg") {
+			margin-bottom: 85px;
+		}
+	}
+	& #{$wp-group-inner} {//content
+		@include media-breakpoint-up("md") {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			justify-content: space-between;
+		}
+
+		& > #{$wp-group} {//item
+			position: relative;
+			width: 100%;
+			margin-bottom: 90px;
+			@include media-breakpoint-up("md") {
+				width: 33%;
+				&:nth-child(4),&:nth-child(5),&:nth-child(6) {
+					margin-bottom: 0;
+				}
+			}//md
+			@include media-breakpoint-up-xxl {//min-width: 1455px
+				width: 16.66%;
+			}//xxl
+
+		}//item
+	}//content flex container
+
+	// & p,
+	& h2 {//item title
+		display: flex;//for vertical centering
+		flex-direction: column;
+		justify-content: center;
+		font-size: 24px;//override h2
+		width: 50%;
+		min-height: 100px;//fixed header
+		@include media-breakpoint-up("md") {
+			width: 100%;
+			min-height: 80px;
+		}
+		@include media-breakpoint-up("lg") {
+			justify-content: flex-start;
+			min-height: 100px;
+			font-size: 32px;//smaller that usual h2
+			@include cyrillic-fix {
+				font-size: 26px;
+			}
+		}//lg
+		@include media-breakpoint-up("xl") {
+				font-size: 34px;
+				@include cyrillic-fix {
+					font-size: 30px;
+				}
+			}//xl
+		@include media-breakpoint-up-xxl {
+			font-size: 33px;
+			@include cyrillic-fix {
+				font-size: 20px;
+			}
+		}//xxl
+
+		& + p {//other txt
+			@include media-breakpoint-up("sm") {
+				width: 90%;
+			}
+		}//xl
+	}//h2
+
+	// Slick slider tweaks
+	& .slick-list {
+		& .slick-slide {
+			& #{$wp-inner} {
+				padding: 80px 15px 0 35px !important;
+			}
+		}//slide
+	}
+
+
+}//six-items

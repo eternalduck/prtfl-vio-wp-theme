@@ -1,0 +1,84 @@
+// styles for all sections of Portfolio page
+
+// slider & slides styles are in portfolio-slider.scss
+
+// whole page itself, class is added to "page-class" acf field
+.portfolio-page {
+	@include default-bg-light;
+	background-attachment: fixed;
+	& ~ .side-menu {//interferes with slider btns
+		display: none;
+	}
+	h2 {
+		text-align: center;
+		margin-bottom: 40px;
+	}
+
+	//too much empty space here so we override blocks the deafult height
+	.common-block {
+		@include media-breakpoint-down("sm") {
+			min-height: auto;
+		}
+	}
+	h2 {
+		margin-bottom: 10px;
+	}
+
+
+
+}//portfolio-page
+
+
+// All classes below should be added to "Additional CSS class" field of wp-group together with .common-block class, "HTML anchor" is also required
+
+// "We invest in champions" block
+.portf-intro {
+	@include section-padding-mob;
+	@include media-breakpoint-down("sm") {
+		&.common-block {
+			padding-top: 80px;
+			justify-content: flex-start !important;//disable vert centering here
+			min-height: 500px;//override
+		}
+	}//down("sm")
+	p {
+		@include text-mid;
+	}
+	@include media-breakpoint-up("md") {
+		h1 {
+			width: 90%;
+		}
+		p {
+			width: 60%;
+		}
+	}
+
+	.common-block__img {
+		&_mob {//hidden from MD
+			width: 100%;
+			bottom: -50px;//-100px;
+			@include media-breakpoint-up("sm") {
+				bottom: -70px;
+			}
+		}//mob
+		&_desk {
+			@include media-breakpoint-down("sm") {
+				display: none;//because there's mob img set in admin
+			}
+			@include media-breakpoint-up("lg") {
+				width: 850px;
+				bottom: -20px;
+			}
+		}//desk
+	}
+
+
+
+}//portf-intro
+
+//"In partnership with ..." block
+.portf-partnership {
+	@include media-breakpoint-down("sm") {
+		margin-bottom: 40px;
+	}
+}//portf-partnership

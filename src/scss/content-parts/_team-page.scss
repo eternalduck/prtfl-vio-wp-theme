@@ -1,0 +1,57 @@
+// styles for Team Page
+// the page consists of wp-groups, and each one should have "common-block" class assigned in "Additional CSS class" field
+
+// class is added to "page-class" acf field
+.team-page {
+	background-size: cover;
+	background-attachment: fixed;
+	padding-top: 0;//override .page-content
+	@include last-block-padding-bottom;
+	@include media-breakpoint-down("sm") {
+		padding-top: 10%;
+	}
+	& h2 + p {//person's position
+		text-transform: uppercase;
+		color: $gray-dark;
+		font-weight: 700;
+		font-size: 15px;
+	}
+	& .common-block {
+		@include header-compensation;
+		display: flex;
+		flex-direction: column;
+		@include media-breakpoint-up("lg") {
+			padding-left: 80px;//space for side menu
+		}
+		@include media-breakpoint-up("xl") {
+			padding-left: 0;
+		}
+	}
+	@include media-breakpoint-down("sm") {//make txt below photo
+		& #max,//first 2 persons
+		& #svitlanka {
+			& #{$wp-col}:first-child {
+				order: 1;
+			}
+		}//columns
+		& #{$wp-cols} {
+			& #{$wp-col}:first-child {//last 3 persons
+				order: 2;
+			}
+			& #{$wp-col}:last-child {
+				order: 1;
+			}
+		}//columns
+	}//sm-down
+
+	& #{$wp-img} {
+		& img {
+			object-position: top;
+			@include media-breakpoint-down("sm") {//make txt below photo
+				object-position: left !important;
+				height: 250px;
+			}
+		}
+	}//image
+
+}

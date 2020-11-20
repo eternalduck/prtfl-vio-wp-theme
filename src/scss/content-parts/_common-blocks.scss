@@ -1,0 +1,130 @@
+// Layout, image position & dimensions for Template Name: Block X
+// see light & dark color themes in _block-light.scss & _block-dark.scss
+
+
+
+//light bg by default, see also .dark below
+.common-block {//.entry d-flex flex-column justify-content-lg-center
+	justify-content: center;////in case if .common-block class is assigned in editor, witout Template: Block
+	overflow: hidden;//due to big images
+	position: relative;
+	@include common-block-height;
+	color: $darkblue;
+	&.full-width {//to have a wide section, add this to wp-group in editor along with "common-block" and html anchor
+		& > #{$wp-inner} {
+			padding-left: 15px;
+			padding-right: 15px;
+			width: 100% !important;
+			@include media-breakpoint-up("lg") {
+				padding-left: 40px;
+				padding-right: 15px;
+			}
+			@include media-breakpoint-up-xxl {
+				padding-left: 0;
+				margin-right: auto;
+				margin-left: auto;
+				max-width: 1400px;//more that bootstrap content, that's 1140px!
+			}
+		}//wp-inner
+	}
+	& .col {
+		position: relative;//for __img positioning
+	}
+	&__content {
+		@include section-padding;
+		z-index: 50;
+		position: relative;
+		&_full-width {//make space for side-menu
+			@include media-breakpoint-up("lg") {
+				padding-left: 40px;
+			}
+			@include media-breakpoint-up-xxl {
+				padding-left: 0;
+				margin-right: auto;
+				margin-left: auto;
+				max-width: 1400px;//more that bootstrap content, that's 1140px!
+			}
+		}//full-width
+
+	}//content
+	&__bg {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background-size: cover;
+		background-repeat: no-repeat;
+		&_deep {
+			z-index: 1;
+		}
+		&_upper {
+			z-index: 40;//sholdn't be higher than __content!
+			background-position: bottom center;
+			@include media-breakpoint-up("lg") {
+				background-position: unset;
+				
+			}
+		}
+	}
+
+	
+	&__img {//sits in .col, calibrated on Front Goal
+		position: absolute;
+		z-index: 30;
+		width: 500px;
+		right: 0;
+		bottom: -200px;
+		@include media-breakpoint-up("md") {
+			width: 700px;
+			right: -350px;
+			bottom: 0;
+		}
+		@include media-breakpoint-up("lg") {
+			width: 900px;
+			right: -480px;
+			bottom: 0;
+		}
+		@include media-breakpoint-up("xl") {
+			width: 900px;
+			right: -400px;
+			bottom: 0;
+		}
+		@include media-breakpoint-up-xxl {
+			right: -250px;
+		}
+	}//img
+
+// class should be added to "page-class" acf field
+	&.dark {
+		color: $white;
+		background-color: $darkblue;
+	}//dark
+
+
+}//common-block
+
+//////////////////////////////////////
+// Template Name: Full-width Page
+// the template should filled with logical portion/sections of content wrapped in a wp-group with .common-block class & anchor(id)
+.page-full {//hadrcoded in template file
+	& .common-block {//wp-group, sits in .row, is a flex-child
+		flex-grow: 1;
+		flex: 0 0 100%;
+		display: flex;
+		flex-direction: column;
+		align-content: center;//center vertically
+		& > #{$wp-inner} {//immediate parent of content, we assign a content width to it
+			@include content-width;//!!!
+			@include centered;
+			position: relative;
+			@include media-breakpoint-up("lg") {
+				padding-left: 60px;//make space for side-menu
+			}
+			@include media-breakpoint-up-xxl {
+				padding-left: 0;
+			}
+		}
+	}
+
+}//page-full

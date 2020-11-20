@@ -1,0 +1,21 @@
+// styles for "Strategy and Business Optimisation" section,
+// it uses Template Name: Block
+// class is added to "page-class" acf field
+
+.invest-strategy {
+
+	& h2 {//item title
+		@include media-breakpoint-up("md") {
+			@include cyrillic-fix {
+				font-size: 21px;
+			}
+		}//md
+		@include media-breakpoint-up("lg") {
+			@include cyrillic-fix {
+				font-size: 24px;
+			}
+		}//lg
+	}
+
+
+}

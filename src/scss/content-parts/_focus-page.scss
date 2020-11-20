@@ -1,0 +1,260 @@
+// styles for all sections of Investment Focus page
+
+// whole page itself, class is added to "page-class" acf field
+.focus-page {
+	background-color: $darkblue;
+	@include header-compensation;
+	// @include header-compensation-mob;
+	& .common-block {
+		color: $white;
+		@include section-padding;
+		// @include section-padding-mob;
+	}
+	& h1 {
+		text-align: center;
+	}
+
+}//focus-page
+
+// All classes below should be added to "Additional CSS class" field of wp-group together with .common-block class, "HTML anchor" is also required
+
+// "Investment focus" group
+.focus-strategy {
+	position: relative;//for bg & img positioning
+	overflow: hidden;
+	@include media-breakpoint-up("lg") {
+		background: url("images/focus-page-small-circles.png") center 70%/contain no-repeat;
+	}
+	&:before {//main block bg, pseudo used to be able to make layers
+		content: "";
+		display: block;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		z-index: 5;
+		@include media-breakpoint-up("lg") {
+			@include default-bg-dark;
+		}
+	}
+	&:after {//additional block img
+		content: "";
+		background: url("images/circle-big.svg") top/cover no-repeat;
+		display: block;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		right: 0;
+		bottom: -50%;
+		z-index: 0;
+	}
+	& > #{$wp-inner} {//items' immediate parent
+		display: flex;
+		flex-flow: row;
+		flex-wrap: wrap;
+		z-index: 10;//be above bg
+		& h1 {
+			flex: 1 0 100%;
+		}
+		& h2 {//round items
+			position: relative;
+			background: url("images/circle-thin.png") center/contain no-repeat;
+			flex: 0 1 100%;
+			width: 300px;
+			height: 300px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			text-align: center;
+			@include media-breakpoint-up("lg") {
+				flex: 0 1 50%;
+				width: 500px;
+				height: 500px;
+			}
+		}
+	}//wp-inner main container
+
+}//focus-strategy
+
+
+
+/////////////////////////////////////////////
+// "Selection criteria" group
+.focus-criteria {
+	@include media-breakpoint-up("lg") {
+		background: url("images/block-bg-dark_flipped.svg") center/cover no-repeat;
+	}
+	& > #{$wp-inner} {//items' immediate parent
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}
+	& h1 {
+		flex: 1 0 100%;
+	}
+	@include media-breakpoint-only("lg") {
+		@include cyrillic-fix {
+			h2 {
+				height: 100px;//make even height
+			}
+		}
+	}
+	@include media-breakpoint-up("lg") {
+		h2 {
+			height: 90px;//make even height
+		}
+	}
+	& .accept,
+	& .reject {
+		flex: 0 1 100%;
+		position: relative;
+		padding: 50px 30px;
+		background: $dustblue2;
+		border-radius: 15px;
+		overflow: hidden;
+		@include media-breakpoint-up("lg") {
+			flex: 0 1 49%;
+			padding: 40px 50px 60px 90px;
+			margin-right: 0;
+			margin-left: 0;
+			& h2, & h3 {
+				padding-left: 40px;
+			}
+		}
+		#{$wp-inner} {
+			position: relative;
+			z-index: 100;//be above those big numbers
+		}
+		&:before {
+			position: absolute;
+			top: -30px;
+			color: $dustblue-dark;
+			font-size: 550px;
+			font-weight: 900;
+			line-height: 1;
+			z-index: 0;
+			@include media-breakpoint-down("md") {
+				top: -100px;
+			}
+		}
+	}
+	& .accept {//left block
+		@include media-breakpoint-down("md") {
+			padding-bottom: 320px;//
+			& #{$wp-group} {//wrapper for h3 & btn, just for their mob view
+				position: absolute;//relative to wp-inner
+				background: $darkblue;
+				padding: 60px 0 110px;//to accomodate btn's shadow
+				left: -30px;//.accept padding
+				right: -30px;//.accept padding
+				margin-top: 30px;
+				&:before {//.accept's lower border imitation
+					content: "";
+					display: block;
+					position: absolute;
+					top: -1px;
+					width: 100%;
+					height: 20px;
+					background: $dustblue2;
+					border-radius: 0 0 15px 15px;
+
+				}
+			}//wrap
+			& h3 {
+				text-align: center;
+			}
+			& .btn {//width: 290
+				margin-left: 0 !important;
+				left: 50%;
+				margin-left: -145px !important;
+			}
+		}//md-down
+		&:before {
+			content: "1";
+			right: -90px;
+		}
+		& .btn {
+			margin-top: 30px;
+			margin-left: 40px;
+		}
+	}
+	& .reject {//right block
+		&:before {
+			content: "2";
+			right: -50px;
+		}
+	}
+
+
+
+}//focus-criteria
+
+
+
+/////////////////////////////////////////////
+// "We only invest in.." group
+.focus-only {
+	position: relative;//for bg & img positioning
+	&:before {//main block bg, pseudo used to be able to make layers
+		content: "";
+		display: block;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		z-index: 5;
+		@include media-breakpoint-up("lg") {
+			@include default-bg-dark;
+		}
+	}
+	@include media-breakpoint-up("lg") {
+		&:after {//additional block img
+			content: "";
+			background: url("images/focus-page-only.png") center/contain no-repeat;
+			display: block;
+			position: absolute;
+			width: 500px;
+			height: 500px;
+			right: -100px;
+			bottom: 0;
+			z-index: 0;
+			@include media-breakpoint-up("xl") {
+				right: 0;
+			}
+			@include media-breakpoint-up-xxl {
+				right: 10%;
+			}
+		}
+	}//lg
+	& > #{$wp-inner} {//items' immediate parent
+		position: relative;//for img positioning
+		text-align: center;
+		padding-left: 15px;
+		padding-right: 15px;
+		h1, h2 {
+			position: relative;
+			z-index: 10;//be above bg & image
+		}
+		h1 {
+			margin-bottom: 70px;
+		}
+		@include media-breakpoint-up("sm") {//make them less wide
+			h1 {
+				padding-right: 10%;
+				padding-left: 10%;
+			}
+			h2 {
+				padding-right: 15%;
+				padding-left: 15%;
+			}
+		}
+		& .btn {
+			@include centered;
+			margin-top: 80px;
+			z-index: 10;
+		}
+	}//wp-inner
+
+}//focus-only

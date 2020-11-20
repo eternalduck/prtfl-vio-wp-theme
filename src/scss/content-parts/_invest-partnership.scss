@@ -1,0 +1,41 @@
+// styles for "Establishing Strategic Partnerships" section,
+// it uses Template Name: Block
+// class is added to "page-class" acf field
+
+
+.invest-partnership {
+	// @include last-block-padding-bottom;
+	padding-bottom: 60px;
+	@include media-breakpoint-up("lg") {
+		padding-bottom: 0;
+	}
+	& .btn {
+		margin: 50px auto 0;
+	}
+	& h2 {//item title
+		min-height: 70px;//fixed header
+		@include media-breakpoint-only("md") {
+			@include cyrillic-fix {
+				font-size: 21px;
+			}
+		}
+		@include media-breakpoint-up("lg") {
+			min-height: 95px;
+			@include cyrillic-fix {
+				font-size: 24px;
+			}
+		}//lg
+		@include media-breakpoint-up("xl") {
+			min-height: 95px;
+			@include cyrillic-fix {
+				font-size: 32px;
+			}
+		}//xl
+	}
+
+	& .common-block__bg_upper {
+		background-position: center 750px;
+	}
+
+
+}

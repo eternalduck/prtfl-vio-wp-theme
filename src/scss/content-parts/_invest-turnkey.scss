@@ -1,0 +1,74 @@
+// styles for "Turnkey Business Units" section,
+// it uses Template Name: Block
+// class is added to "page-class" acf field
+
+.invest-turnkey {
+
+	& .common-block__content {
+		padding-bottom: 250px;//for bg img
+		@include media-breakpoint-only("md") {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			padding-bottom: 350px;
+			& h1 {
+				flex: 1 0 100%;
+				margin-bottom: 60px;
+			}
+			& h2 {
+				margin-bottom: 50px;
+			}
+			& #{$wp-group} {//item
+				flex: 1 0 48%;
+				&:first-of-type h2 {
+					margin-top: 35px;
+				}
+			}
+			& .btn {
+				margin-top: 30px;
+			}
+		}//md-only
+		@include media-breakpoint-up("lg") {
+			padding-bottom: 50px;
+		}
+	}//content
+
+	& h1 {
+		margin-bottom: 30px;
+	}
+	& h2 {
+		margin-bottom: 20px;
+	}
+	& h2 + p {
+		margin-bottom: 30px;
+	}
+	& #{$wp-group} {//item
+		@include media-breakpoint-up("lg") {
+			width: 60%;
+		}
+	}//item
+
+
+	& .common-block__img {
+		@include media-breakpoint-up("md") {
+			width: 700px;
+			right: 100px;
+			bottom: -280px;
+		}
+		@include media-breakpoint-up("lg") {
+			width: 1050px;
+			right: -620px;
+			bottom: -50px;
+		}
+		@include media-breakpoint-up("xl") {
+			right: -500px;
+		}
+		@include media-breakpoint-up-xxl {
+			right: -450px;
+
+		}
+	}//img
+
+
+
+}

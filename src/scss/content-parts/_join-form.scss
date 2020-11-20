@@ -1,0 +1,207 @@
+// style tweaks for a contact form
+// created with Multi Step Form
+// https://wordpress.org/plugins/multi-step-form
+// by @roovwhite
+
+#multi-step-form.fw-wizard {
+	position: relative;
+	margin: 0 auto;
+	padding: 40px 20px 60px;
+	max-width: 590px;
+	border-radius: 5px;
+	background: $white;
+	box-shadow: 0 0 50px rgba(0,0,0,0.2);
+	@include media-breakpoint-up("md") {
+		padding: 40px 30px 90px;
+	}
+	& label + p {
+		color: $gray-dark;
+		margin-top: 10px;
+	}
+	.fw-wizard-step-header-container {
+		position: absolute;
+		top: 0;
+		left: 50%;
+		margin: 0;
+		width: 210px;
+		border-radius: 5px;
+		text-align: center;
+		color: #fff;
+		background: #2B2F4B;
+		box-shadow: 0 4px 50px rgba(0,0,0,0.3);
+		transform: translate(-50%, -50%);
+		z-index: 10;
+		@include media-breakpoint-up("xl") {
+			width: 240px;
+		}
+		& h2 {
+			font-family: Arial;//to disable minuscule numbers:))
+			text-transform: none !important;
+		}
+		h2 {
+			margin-bottom: 0;
+			font-size: 17px;
+			line-height: 65px;
+			font-weight: bold;
+			@include media-breakpoint-up("xl") {
+				font-size: 20px;
+				line-height: 75px;
+			}
+		}
+	}
+
+	.fw-wizard-step-container {
+		h3 {
+			// font-size: 14px;
+			line-height: normal;
+			text-transform: none;
+		}
+
+		.fw-step-part {
+			position: relative;
+			padding: 20px 0;
+			background: $white;
+			border: none;
+
+			&-title {
+				display: none;
+			}
+
+			.fw-text-input {
+				padding-left: 5px;
+				width: 100% !important;
+				font-size: 18px;
+				line-height: 6.1vh;
+				border: 1px solid rgba(0,0,0,0.12);
+				border-radius: 5px;
+				background: $white;
+				box-sizing: border-box;
+				& + .fa-pencil,
+				& + .fa-envelope,
+				& + .fa-asterisk {
+					display: none;
+				}
+			}
+		}
+	}
+
+	.fw-wizard-buttons {
+		display: flex;
+		justify-content: space-evenly;
+		margin: 0;
+	}
+
+	button {
+		display: block;
+		padding: 18px 15px !important;
+		width: 48%;
+		max-width: 180px;
+		height: auto !important;
+		font-size: 1.063em;//17px
+		line-height: 1 !important;
+		font-weight: 900;
+		text-decoration: none;
+		text-transform: uppercase;
+		border-radius: 5px;
+		@include media-breakpoint-up("md") {
+			width: 230px;
+			padding: 20px 30px !important;
+			
+		}
+		&.fw-btn-submit {
+			@include colored-button;
+			margin: 0 0 30px -125px !important;
+			left: 50%;
+			max-width: 250px !important;
+			width: 250px !important;
+			// position: relative;
+			background: linear-gradient(90.03deg, #FA7D48 0.02%, #F05850 58.64%) !important;
+			&:hover {
+				opacity: .9;
+			}
+			&:hover:before {
+				z-index: -1;
+			}
+		}//
+		&.fw-button-next {
+			@include colored-button;
+			background: linear-gradient(90.03deg, #FA7D48 0.02%, #F05850 58.64%) !important;
+			&:hover {
+				opacity: .9;
+			}
+			&:hover:before {
+				z-index: -1;
+			}
+		}
+
+		&.fw-button-previous {
+			margin-right: 0;
+			color: $darkblue;
+			border: 3px solid $darkblue;
+			@include hover-transition;
+			background: transparent !important;
+			cursor: pointer;
+			&:hover {
+				color: $peach;
+				border: 3px solid $peach;
+			}
+		}
+
+		.fa-arrow-circle-left,
+		.fa-arrow-circle-right {
+			display: none;
+		}
+	}//button
+
+	.fw-alert-user {
+		&.fw-alert-user-fail {
+			top: 150px;//should be more than header height
+			left: 50%;
+			bottom: auto;
+			margin: 0;
+			transform: translate(-50%, -50%);
+			background: linear-gradient(90deg, #FA7E48 -3.24%, #F05751 103.39%) !important;
+			z-index: 999;
+		}
+	}
+
+	.fw-block-invalid {
+		input {
+			border-color: $coral !important;
+		}
+
+		.fw-block-invalid-alert {
+			width: calc(100% - 2px);
+			margin: 0;
+			padding: 10px 0 !important;
+			border: none;
+			color: $coral;//$black;
+			border-radius: 0 0 3px 3px;
+		}
+	}
+
+	.fw-textarea {
+		padding: 10px !important;
+		width: 100% !important;
+		font-size: 16px;
+		border-radius: 3px;
+		resize: none;
+
+		& + .fa-pencil {
+			display: none;
+		}
+	}
+
+	.fw-toggle-summary {
+		display: none !important;
+	}
+	.msf-recaptcha-element {
+		position: relative;
+		float: left;
+		width: 100%;
+		margin-bottom: 40px;
+		& > div {
+			margin: 0 auto;
+		}
+	}
+}

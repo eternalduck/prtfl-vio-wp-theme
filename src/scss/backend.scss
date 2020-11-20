@@ -1,0 +1,126 @@
+// September, 29, 2020 by @eternalduck
+// link to the manual is added by js/backend.js 
+
+@import "vars-mixins"; 
+
+.manual-link {
+	position: absolute;
+	top: -26px;
+	left: 40%;
+	color: #4254C2;
+	font-size: 18px;
+	z-index: 99999;
+}
+
+
+//make editor wider!
+.wp-block {max-width: 100% !important;}
+
+//make content preview images smaller
+.block-editor-block-list__block .insert-page img {
+	max-width: 150px;
+}
+.block-editor-block-list__block .insert-page .partners img {
+	max-height: 50px;
+}
+.wp-block-image img {
+	max-width: 300px;
+
+}
+
+//add visible border to a content block & group
+@mixin blockbefore($txt, $clr) {
+	outline: 1px dashed $clr;
+	&:before {
+		content: $txt;
+		font-size: 10px;
+		color: $clr;
+		position: absolute;
+		top: -20px;
+		left: 0;
+	}
+}
+
+.block-editor-block-list__block[aria-label="Block: Group"] {
+	@include blockbefore("Group", #008816);
+}
+
+.block-editor-block-list__block[aria-label="Block: Columns"] {
+	@include blockbefore("Columns", #0024E0);
+}
+
+.block-editor-block-list__layout > .block-editor-block-list__block {
+	outline: 1px dotted #777;
+	padding: 20px;
+	& > & {
+		outline: 1px dotted #CCCCCC;
+		padding: 15px;
+
+	}
+}
+
+//=========================
+// Design-specific tweaks
+//=========================
+
+// style button in editor (but not everywhere due ti iframes)
+.block-editor-block-list__block {
+	& .btn {
+		padding: 28px 50px;
+		text-align: center;
+		font-size: 1.063em;//17px
+		line-height: 1;
+		font-weight: 900;
+		text-decoration: none;
+		text-transform: uppercase;
+		white-space: nowrap;
+		letter-spacing: 2px;
+		border-radius: 5px;
+		color: #fff;
+		background: linear-gradient(90.03deg, #FA7D48 0.02%, #F05850 58.64%);
+	}
+}
+
+//=========================
+//REMOVE ADS
+//=========================
+//hide plugins update alert from side menu
+span.update-plugins {display: none !important;}
+//in yeast settings
+.trp-controls-section-content {display: none !important;}
+
+//Folders plugin ad on pages page
+.wcp-custom-form .upgrade-message {
+	display: none !important;
+}
+//folders btn color
+.add-new-folder,
+.wcp-hide-show-buttons .toggle-buttons {
+	background: #777 !important;
+	border-color: #777 !important;
+}
+//toggle sidebar btn
+.wcp-hide-show-buttons {
+	top: 2px !important;
+}
+//folder names
+.wcp-container .route {
+	margin-bottom: 12px;
+}
+.wcp-container .route .title {
+	font-weight: normal;
+}
+//hide top bar on "all pages"
+.tree-structure-content {display: none !important;}
+
+//page number in folder
+span.total-count,
+.wcp-container .route span.total-count {
+	font-size: 14px !important;
+}
+
+//remove call-to-upgrades on plugins page
+.wcp-folder-upgrade-button,
+tr[data-slug="translatepress-multilingual"] .go_pro,
+ {display: none !important;}
+tr td .row-actions span.delete {display: inline-block !important;}

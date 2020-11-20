@@ -1,0 +1,287 @@
+// Top Menu - desk & mobile
+// Social menu (sits in Footer and mobile version of Top Menu)
+
+//hide duplicated dropdown root item
+.sub-menu li:first-child {
+	display: none;
+}
+
+.menu {
+	& .menu-item {
+		list-style-type: none;
+		user-select: none;
+		margin-bottom: 0;
+		padding: 0 25px;
+		&:last-child {
+			padding-right: 0;
+		}
+		&.orange a {//add this class to menu item in admin
+			color: $peach;
+			&:hover {color: $darkblue;}
+		}
+		& a {
+			margin-right: 0;
+			color: $darkblue;
+			font-weight: 700;
+			font-size: 1.063rem;//17px
+			line-height: 1;
+			text-decoration: none;
+			text-transform: uppercase;
+			white-space: nowrap;
+			@include hover-transition;
+			&:hover {
+				color: $peach;
+				text-decoration: none;
+			}
+		}//a
+		&.current-menu-item a {
+			color: $peach;
+		}
+///// Sub-menu
+		&.menu-item-has-children {
+			position: relative;
+			&:after {//dropdown arrow
+				content: "\25BE";
+				position: absolute;
+				top: 0;
+				right: 8px;
+				font-size: 18px;
+				transition: all .2s ease-in;
+				@include media-breakpoint-down("md") {
+					display: none;
+				}
+			}
+			&:hover:after {
+				transform: rotate(180deg);
+			}
+			@include media-breakpoint-up("lg") {
+				& .sub-menu {//hide when not hovered
+					display: none;
+					opacity: 0;
+				}//.sub-menu
+				&:hover > .sub-menu {// hover dropdown only on desk
+					display: block;
+					opacity: 1;
+					animation: fade_in .5s forwards;//see keyframes below
+					position: absolute;
+					top: 0;
+					right: -30px;
+					left: auto;
+					padding: 60px 0 0;
+					& > li {
+						padding: 13px 90px;
+						background: $white;
+						&:nth-child(2) {
+							padding-top: 90px;
+						}
+						&:last-child {
+							padding-bottom: 40px;
+						}
+					}//li
+					&:before {// imitate header shadow
+						content: "";
+						box-shadow: 0 9px 10px -8px rgba(0, 0, 0, 0.2);
+						position: absolute;
+						width: 110%;
+						height: 30px;
+						top: 33px;//depends on .menu-toggle height
+						left: -5%;
+						z-index: 1;
+					}
+					&:after {// bottom shadow
+						content: "";
+						box-shadow: 0 10px 10px 0px rgba(0, 0, 0, 0.2);
+						position: absolute;
+						width: 100%;
+						height: calc(100% - 62px);
+						bottom: 0;
+						left: 0;
+						z-index: -1;
+					}
+				}// end hover sub-menu shown
+			}//lg
+
+		}//.menu-item-has-children
+///// end Sub-menu
+
+///// Customize language item & its dropdown for desk
+		&.pll-parent-menu-item {
+			@include media-breakpoint-up("lg") {
+				cursor: pointer;
+				&:after {
+					color: $peach;
+				}
+				& a {color: $peach;
+					&:hover {color: $darkblue;}
+				}
+				&:hover > .sub-menu {
+					padding: 30px 0 0;
+					& > li {
+						padding: 13px 30px;
+						&:nth-child(2) {
+							padding-top: 15px;
+						}
+						&:last-child {
+							padding-bottom: 30px;
+						}
+					}//li
+					&:before {display: none;}//no need in fake header shadow here
+				}//hover
+			}//lg
+
+			@include media-breakpoint-down("md") {
+				position: absolute;
+				width: 160px;
+				margin-left: -80px;
+				padding-bottom: 0 !important;
+				bottom: -120px;
+				left: 50%;
+				& > a {display: none;}
+				& .sub-menu {
+					display: flex;
+					flex-direction: row;
+					justify-content: center;
+					& li {
+						display: block;
+						padding: 0 15px;
+						&.mobile-parent-nav-menu-item a {//current lang
+							color: $peach;
+						}
+					}
+				}
+			}//md
+		}//.pll-parent-menu-item
+///// end lang dropdown
+
+
+
+	}//menu-item
+
+
+	// Top Menus - Mobile version
+	// .menu-top from LG-up is with dropdowns
+	// from MD-down turns to mobile menu with social menu
+	@include media-breakpoint-down("md") {
+		&_mobile {//wrapper for mrnu-top & menu-social
+			transform: translateY(-100%);
+			transition: transform .2s ease-in-out;
+			&.open {
+				transform: translateY(0);
+				display: block;
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				padding: 90px 0 130px;
+				width: 100%;
+				height: 100%;
+				background: $white;
+				& .menu-top,
+				& .menu-social {
+					display: block !important;//override d-none
+				}
+				& .menu-toggle {// external .menu-toggle is shown now
+					background: none;
+				}
+				.menu-top {//tweak to accomodate repositioned lang items
+					position: relative;
+					& li {
+						text-align: center;
+						padding: 0 0 45px 0;
+						&:last-child {
+							padding-bottom: 0;
+							height: auto;
+						}
+					}
+				}
+
+			}
+		}//.menu_mobile
+	}//md
+}//.menu
+
+
+// Toggle for both Desk dropdown & Mobile menu (LG-up sits in .top-menu, MD-down .menu-toggle_mob sits in header's .container)
+.menu-toggle {//this class should be added to parent menu item in Top Menu!!! it relates both to toggle btn & to submenu items in opened mob menu!
+	background: url("images/icons/menu-toggle.svg") 50% 4px no-repeat;
+	height: 24px;
+	cursor: pointer;
+	.header__toggle > & {//align toggle btn on mob
+		width: 24px;
+		float: right;
+	}
+	&:after {display: none;}//hide dropdown arrow
+	& > a {//hide item txt
+		display: none;
+		pointer-events: none;
+	}
+
+	@include media-breakpoint-down("md") {
+		&_mob {
+			&.toggled {// for mobile menu
+				background: url("images/icons/icon-close.svg") center no-repeat;
+				position: absolute;
+				top: -20px;
+				right: -10px;
+				width: 55px;
+				height: 55px;
+				border-radius: 50%;
+				box-shadow: 0 1px 10px 0px rgba(0,0,0, .2);
+			}
+
+		}//&_mob
+	}//md
+}//menu-toggle
+
+//Social Menu
+.menu-social {
+	text-align: center;
+	& .menu-item {
+		padding: 0 !important;//remove content li padding
+		&:before {display: none;}//remove list bullets
+		&:nth-child(2) {
+			margin: 0 15px;
+		}
+		@include hover-transition;
+		& svg {
+			width: 24px;
+			height: 24px;
+			&:hover path {
+				fill: $coral;
+			}
+		}
+	}
+
+	&_dark {
+		& .menu-item svg path {
+			fill: $darkblue;
+		}
+	}
+	&_light {
+		& .menu-item svg path {
+			fill: $pink;
+		}
+	}
+	&_big {
+		& .menu-item svg {
+				width: 38px;
+				height: 38px;
+			}//svg
+	}
+	@include media-breakpoint-down("md") {
+		.menu_mobile & {
+			margin-top: 120px;
+		}//.menu_mobile &
+	}//md
+
+}
+
+// Other:
+@keyframes fade_in {//for &:hover > .sub-menu
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}

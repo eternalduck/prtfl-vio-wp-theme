@@ -1,0 +1,161 @@
+// Slick slider overrides for Portfolio page: 
+// Portfolio Companies and In partnership with .. sections
+// add .portfolio-slider class to a group of items in admin
+
+.portfolio-slider {
+	.slick-slide {
+		& #{$wp-group} {
+			vertical-align: top;//!!
+			position: relative;
+			padding: 25px 15px 25px 120px;// img + its margin
+			@include media-breakpoint-up("lg") {
+				padding: 25px 15px 55px 140px;
+			}
+			& p:first-of-type {
+				margin-bottom: 5px;
+			}
+			& img {
+				object-position: center center;
+				position: absolute;
+				left: 20px;
+				top: 40px;
+				width: 85px;
+				height: 85px;
+				box-shadow: 0px 4px 30px rgba(0,0,0,0.15);
+				@include media-breakpoint-up("lg") {
+					left: 40px;
+				}
+			}
+		}//wp-group
+	}//slick-slide
+
+	//second slider
+	&.slider-partner .slick-slide {
+		& #{$wp-group} {
+			padding: 25px 15px 25px 120px;// img + its margin
+			@include media-breakpoint-up("lg") {
+				padding: 25px 15px 25px 180px;
+			}
+		}
+		img {
+			width: 80px;
+			height: 80px;
+			@include media-breakpoint-up("lg") {
+				width: 120px;
+				height: 120px;
+			}
+		}
+	}
+
+	&__arr-holder {
+		position: absolute;
+		width: 600px;
+		height: 600px;
+		background: $white;
+		box-shadow: 0 4px 150px rgba(0,0,0,0.15);
+		border-radius: 50%;
+		top: calc(50% - 300px);
+		&_next {
+			right: -550px;
+		}
+		&_prev {
+			left: -550px;
+		}
+		@include media-breakpoint-down("sm") {
+			display: none;
+		}
+		@include media-breakpoint-up("lg") {
+			&_next {
+				right: -500px;
+			}
+			&_prev {
+				left: -500px;
+			}
+		}
+	}//&__arr-holder
+
+	.slick-arrow {
+		width: 20px;
+		height: 40px;
+		top: 47%;
+		bottom: auto;
+		z-index: 70;
+		background-size: contain !important;
+		@include media-breakpoint-up("md") {
+			top: 38%;
+			background-size: 20px !important;
+			width: 100px;
+			height: 400px;
+		}
+		&:before {
+			content: '';
+			display: block;
+			width: 120px;
+			max-width: 0;
+			height: 0;
+			border: 1px solid $gray-blue;
+			position: absolute;
+			top: 50%;
+			transition: .5s ease;
+		}
+		&:hover:before {
+			@include media-breakpoint-up("md") {
+				max-width: 120px;
+			}
+		}
+		&.slick-next {
+			background: url("images/icons/arr-next.svg") no-repeat;
+			right: -5px;//-50px;
+			background-position: right;
+			transform: translateY(-50%);
+			@include media-breakpoint-up("sm") {
+				right: -40px;
+			}
+			@include media-breakpoint-up("md") {
+				background-position: center;
+				right: -115px;
+			}
+			@include media-breakpoint-up("xl") {
+				right: -130px;
+			}
+			@include media-breakpoint-up-xxl {
+				right: -175px;
+			}
+			&:before {
+				top: calc(50% + 1px);//??wtf it was misplaced here
+				left: 56px;
+				transform: translate(-100%, -1px);
+			}
+
+		}
+		&.slick-prev {
+			background: url("images/icons/arr-prev.svg") no-repeat;
+			left: -5px;//-50px;
+			background-position: left;
+			@include media-breakpoint-up("sm") {
+				left: -40px;
+			}
+			@include media-breakpoint-up("md") {
+				background-position: center;
+				left: -115px;
+			}
+			@include media-breakpoint-up("lg") {
+				left: -160px;//non-symmetric due to extra padding
+			}
+			@include media-breakpoint-up("xl") {
+				left: -170px;
+			}
+			@include media-breakpoint-up-xxl{
+				left: -175px;
+			}
+			&:before {
+				right: 56px;
+				transform: translate(100%, -1px);
+			}
+
+		}
+
+	}//slick-arrow
+
+
+}

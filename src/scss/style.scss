@@ -1,0 +1,358 @@
+// September, 29, 2020 by @eternalduck
+// Custom styles
+// Site Manual: ...
+
+@import "vars-mixins";
+@import "reset";
+/* ======= DEBUG ======= */
+// @import "debug";// for dev only
+/* ======= END DEBUG ======= */
+
+// Bootstrap included in _vars-mixins
+// only grid is used, not the entire framework
+
+
+// Blocks' styles are imported in the bottom for proper inheritance, along with IE tweaks
+
+// google fonts embedded in violet/header.php:
+// <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+
+// use pseudo-classes OR body classes for language-specific styles:
+// :lang(en), :lang(ru), :lang(uk) (Ukrainian)
+// body.language-en, body.language-ru, body.language-ua
+
+html {
+	scroll-behavior: smooth;
+}
+img {
+	object-fit: contain;
+	object-position: left;
+}
+
+////////////////
+// Typography
+////////////////
+
+body {
+	font-family: 'Raleway', sans-serif;
+	color: $darkblue;
+	font-weight: normal;
+}
+
+p, li {
+	font-size: 0.875em;//14px;
+	line-height: 1.5;
+	// margin: 0 0 1.875rem;//30px
+	@include media-breakpoint-up("lg") {
+		font-size: 1.063em;//17px;
+		line-height: 1.4;
+	}
+}
+li {
+	margin: 0 0 1.875rem;//30px
+}
+p {
+	margin: 0 0 1.250rem;//20px
+}
+
+
+a {
+	color: $darkblue;
+	text-decoration: underline;
+	font-weight: 700;
+	&:hover {
+		text-decoration: none;
+
+	}
+}
+h1, h2, h3 {
+	font-weight: 900;
+	margin: 0;
+	text-transform: uppercase;
+	& strong, & b {font-weight: 900}
+}
+
+h1 {
+	text-transform: uppercase;
+	font-size: 1.875em;//30px
+	line-height: 1.3;
+	margin-bottom: 1.875rem;//34px
+	@include media-breakpoint-up("md") {
+		font-size: 2.250em;//36px
+		margin-bottom: 2.188rem;//35px
+	}
+	@include media-breakpoint-up("lg") {
+		font-size: 3.75em;//60px
+		line-height: 1.2;
+		margin-bottom: 2.5rem;//40px
+	}
+}
+
+
+h2 {
+	text-transform: uppercase;
+	font-size: 1.5em;//24px
+	line-height: 1.3;
+	margin-bottom: 0.750rem;//12px
+	@include media-breakpoint-up("lg") {
+		font-size: 2.250em;//36px
+		line-height: 1.1;
+	}
+}
+
+h3 {
+	font-size: 1.625em;//26px
+	line-height: 1.3;
+}
+
+
+.text {
+	&-extra {@include text-extra;}
+	&-big {@include text-big;}
+	&-mid {@include text-mid;}
+}//txt
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+	@include media-breakpoint-up($breakpoint) {
+		$infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+		.text#{$infix}-left   { text-align: left !important; }
+		.text#{$infix}-right  { text-align: right !important; }
+		.text#{$infix}-center { text-align: center !important; }
+	}
+}
+
+
+////
+
+b, strong {
+	font-weight: bold;
+}
+// end Typography
+
+////////////////
+// Common Elements & Classes
+////////////////
+
+// For default single pages - page.php & index.php
+.page-content {// compensate fixed header
+	padding-top: calc(50px + #{$header-height-xs});
+	@include media-breakpoint-up("md") {
+		padding-top: calc(50px + #{$header-height-md});
+	}
+	@include media-breakpoint-up("lg") {
+		padding-top: calc(50px + #{$header-height-lg});
+	}
+}
+
+// Buttons are stored in wp Reusable Blocks, i.e.
+// <a href="/join" class="btn btn_colored"><span>Join Us</span></a>
+.btn {
+	position: relative;
+	display: block;
+	width: 300px;//for centering ability
+	padding: 28px 30px;//28px 100px;
+	text-align: center;
+	font-size: 1.063em;//17px
+	line-height: 1;
+	font-weight: 900;
+	text-decoration: none;
+	text-transform: uppercase;
+	white-space: nowrap;
+	letter-spacing: 2px;
+	border-radius: 5px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	outline: none !important;
+	opacity: 1;
+	& span {
+		position: relative;
+		z-index: 2;
+	}
+	@include media-breakpoint-down("md") {//in most cases it's centered on MD-down
+		@include centered;
+		width: 290px;
+	}
+	&_colored {
+		color: $white;
+		@include coral-peach-gradient;
+		@include coral-shadow;
+		border: none !important;
+		&:before {//for gradient animation, you can't animate it as usual
+			@include coral-peach-gradient-hover;
+			content: "";
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			z-index: -1;
+			opacity: 0;
+			border-radius: 5px;
+			transition: all .3s ease-in;
+		}
+		&:hover:before {
+			opacity: 1;
+			z-index: 1;
+			box-shadow: 0px 17px 60px -18px #F05850;
+		}
+	}//colored
+	&_plain {
+		color: $darkblue;
+		border: 3px solid $darkblue;
+		@include hover-transition;
+		&:hover {
+			color: $peach;
+			border: 3px solid $peach;
+		}
+	}//plain
+
+}// end btn
+
+
+
+// List with nice bullets
+.entry {// make sure only ul in content area is formatted
+	ul {
+		margin: 30px 0 40px;
+		text-align: left;
+		@include listBullets;
+		& li {
+			margin-bottom: 25px;
+		}
+
+	}//ul
+}
+// end List with nice bullets
+
+
+
+// add this class to a group of items (.wp-block-group)
+// to have coral circles on items' headers
+.list-with-circles {
+	@include circle-bg-on-group;
+}
+
+
+//add this class to a list (ul)
+// to have coral bullets on li items
+.list-with-bullets {
+	@include listBullets;
+}
+
+//add this class to wp-group what contains items as another wp-groups to have big coral numbers on div items (1-4)
+.list-with-numbers {
+	& #{$wp-inner} > div {
+		@include listNumbers;
+	}
+}
+
+//add this class to wp-group
+// to have coral lines on p items
+.items-with-lines {
+	@include itemsLines;
+}
+
+
+// Slick slider tweaks
+// add "slider" class to wp-group containing other groups and they become slides
+.slick-slide {
+	outline: none;
+}
+.slick-slider {
+	&.slick-dotted {
+		margin-bottom: 0 !important;
+	}
+}
+.slick-dots {
+	text-align: center !important;
+	bottom: -100px !important;
+	& li {
+		padding-left: 32px !important;
+		&:before {display: none;}//remove nice list bg
+		& button:before {
+			font-size: 0 !important;
+			opacity: 1 !important;
+			border-radius: 50%;
+			width: 11px !important;
+			height: 11px !important;
+			background: linear-gradient(90.03deg, #FA7D48 0.02%, #F05850 58.64%) !important;
+			box-shadow: 0px 20px 60px -14px rgba(240, 88, 80, 0.8);
+		}
+		&.slick-active button:before {
+			background: $darkblue !important;
+			.dark & {//in dark blocks
+				background: $white !important;
+			}
+		}
+	}//li
+}
+
+
+
+////////////////////////
+// WPtweaks
+////////////////////////
+
+body.home .custom-logo-link {pointer-events: none;}
+.screen-reader-text {display: none}
+li.widget {list-style-type: none}
+
+
+//fix flex columns folding for our breakpoint
+@include media-breakpoint-down("sm") {
+	#{$wp-col} {
+		flex-basis: 100% !important;
+	}
+	#{$wp-col}:nth-child(2n) {
+		margin-left: 0 !important;
+	}
+}
+
+
+////////////////////////
+// Includes
+////////////////////////
+@import "header-footer";
+@import "side-menu";
+@import "page-404";
+
+// Common Blocks Design
+@import "content-parts/common-blocks";
+@import "content-parts/six-items";
+@import "content-parts/three-num-items";
+// Content sections
+// Frontpage
+@import "content-parts/front-intro";
+@import "content-parts/front-goal";
+@import "content-parts/front-get";
+@import "content-parts/front-invest";
+// Smart Investments
+@import "content-parts/invest-intro";
+@import "content-parts/invest-benefits";
+@import "content-parts/invest-strategy";
+@import "content-parts/invest-turnkey";
+@import "content-parts/invest-boost";
+@import "content-parts/invest-partnership";
+
+
+// Portfolio
+@import "content-parts/portfolio-page";
+@import "content-parts/portfolio-slider";
+
+// Other Pages
+@import "content-parts/focus-page";
+@import "content-parts/expertise-page";
+@import "content-parts/team-page";
+@import "content-parts/join-page";
+@import "content-parts/thank-you";
+
+// Contact form
+@import "content-parts/join-form";
+
+
+@import "ie-tweaks";
+
+//IE fail disclaimer (see _ie-tweaks.scss)
+.deprecated {display: none;}

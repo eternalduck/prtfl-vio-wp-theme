@@ -1,0 +1,41 @@
+// styles for the first block on "Smart Investments" page
+// it uses Template Name: Block Centered
+// class is added to "page-class" acf field
+
+.invest-intro {
+	& h1 {
+		margin-bottom: 65px;
+	}
+	& .btn {
+		margin-top: 50px;
+	}
+	& .common-block__content {
+		@include media-breakpoint-up("lg") {
+			width: 70%;
+		}
+	}
+	& .common-block__img {
+		bottom: -300px;
+		@include media-breakpoint-up("sm") {
+			right: -100px;
+		}
+		@include media-breakpoint-up("md") {
+			width: 500px;
+			right: -100px;
+			bottom: -50px;
+		}
+		@include media-breakpoint-up("lg") {
+			width: 800px;
+			right: -430px;
+			bottom: 0;
+		}
+	@include media-breakpoint-up("xl") {
+			width: 900px;
+			right: -430px;
+			bottom: 0;
+		}
+		@include media-breakpoint-up-xxl {
+				right: -320px;
+		}
+	}//img
+}

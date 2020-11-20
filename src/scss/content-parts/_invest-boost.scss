@@ -1,0 +1,30 @@
+// styles for "Boost of Business Development" section,
+// it uses Template Name: Block
+// class is added to "page-class" acf field
+
+//based on .six-items but different grid on LG
+.invest-boost {
+	& #{$wp-group-inner} {//content
+		& > .wp-block-group {//item
+			margin-bottom: 100px;
+			@include media-breakpoint-up("lg") {//override .six-items
+				width: 33% !important;
+			}
+		}//item
+
+		& h2 {//item title
+			font-size: 24px;//override h2
+			line-height: 1.3;
+			@include media-breakpoint-only("md") {
+				font-size: 20px;
+			}
+			@include media-breakpoint-up("md") {
+				min-height: 120px;
+			}
+			@include media-breakpoint-up("xl") {
+				min-height: 80px;
+			}
+		}
+	}//content
+
+}

@@ -1,0 +1,31 @@
+// styles for "Benefits of Smart Investments for Founders" section,
+// it uses Template Name: Block
+// class is added to "page-class" acf field
+
+.invest-benefits {
+	& h1 {
+		@include media-breakpoint-up("md") {
+			margin-bottom: 80px;
+		}
+	}
+	
+	& h2 {//item title
+		font-size: 24px;//override h2
+		line-height: 1.3;
+		@include media-breakpoint-only("md") {
+			@include cyrillic-fix {
+				font-size: 19px;
+			}
+		}
+		@include media-breakpoint-up("md") {
+			min-height: 110px;
+		}
+		@include media-breakpoint-up("xl") {
+			min-height: 120px;
+		}
+		@include media-breakpoint-up-xxl {
+			min-height: 100px;
+		}
+	}//h2
+
+}

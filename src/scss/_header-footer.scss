@@ -1,0 +1,64 @@
+//////////////////
+// Header
+
+@import "_menu";
+
+.header {
+	position: fixed;
+	width: 100%;
+	background: $white;
+	box-shadow: 0 1px 10px 0px rgba(0,0,0, .2);
+	z-index: 999;
+	& .row {
+		height: 60px;
+		@include media-breakpoint-up("md") {
+			height: 80px;
+		}
+		@include media-breakpoint-up("lg") {
+			height: 100px;
+		}
+	}
+
+	&__logo {
+		z-index: 9;//to be visible in mob menu
+		width: 115px;
+		& img {
+			height: 30px;
+			@include media-breakpoint-up("md") {
+				width: 170px;
+				height: 50px;
+			}
+			@include media-breakpoint-up("lg") {
+				width: 230px;
+				height: 65px;
+			}
+		}
+	}
+	&__menu {
+		z-index: 1;
+	}
+	&__toggle {
+		z-index: 9;
+	}
+
+}
+
+
+
+//////////////////
+// Footer
+
+.footer {
+	height: $footer-height-xs;
+	@include media-breakpoint-up("lg") {
+		height: $footer-height-lg;
+	}
+	.textwidget {//copywright txt & mail
+		color: $gray-dark;
+		text-align: center;
+		padding: 10px 0 5px;
+		a {
+			color: $gray-dark;
+		}
+	}
+}

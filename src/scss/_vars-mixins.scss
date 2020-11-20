@@ -1,0 +1,447 @@
+// September, 29, 2020  by @eternalduck
+
+// Global vars & mixins
+@import "bootstrap/bootstrap-grid";
+// Bootstrap Grid Reference:
+// No media query necessary for xs!
+// @include media-breakpoint-up(sm) { ... }
+// @include media-breakpoint-up(md) { ... }
+// @include media-breakpoint-up(lg) { ... }
+// @include media-breakpoint-up(xl) { ... }
+// Reverse queries:
+// @include media-breakpoint-down(xs) { ... }
+// @include media-breakpoint-down(sm) { ... }
+// @include media-breakpoint-down(md) { ... }
+// @include media-breakpoint-down(lg) { ... }
+
+
+// Brand Colors
+$darkblue: #1b1f39;
+$dustblue: #4A4E69;
+$dustblue2: #252944;
+$dustblue3: #34395b;
+$dustblue-lite: #5e6379;
+$dustblue-dark: #343856;
+$darkbluedust: #2B2F4B;
+$transp-darkblue: rgba(43,47,75,0.7);
+
+$coral: #FE574F;
+$peach: #FF7E44;
+$pink: #f2bdb8;
+
+$white: #fff;
+$gray-lite: #DCDCDE;
+$gray-dark: #929292;
+$gray-blue: #B5B4BD;
+
+
+
+// Common dimensions
+$header-height-xs: 60px;
+$header-height-md: 80px;
+$header-height-lg: 100px;
+$footer-height-xs: 80px;
+$footer-height-lg: 100px;
+
+
+//wp classes
+$wp-group: ".wp-block-group";
+$wp-inner: ".wp-block-group__inner-container";
+$wp-group-inner: ".wp-block-group > .wp-block-group__inner-container";
+$wp-img: ".wp-block-image";
+$wp-cols: ".wp-block-columns";
+$wp-col: ".wp-block-column";
+
+
+/////////////////
+// Mixins
+/////////////////
+// additional breakpoint!
+// ref: Bootstrap breakpoints:
+// xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px
+@mixin media-breakpoint-up-xxl {
+	@media screen and (min-width: 1456px) {
+		@content;
+	}
+}
+
+//for language-specific fixes
+@mixin cyrillic-fix {
+	&:lang(ru),
+	&:lang(uk) {
+		@content;
+	}
+}
+
+/////////////////////////
+// Common positioning
+// Content width
+@mixin content-width {
+	width: 100%;
+	margin-right: auto;
+	margin-left: auto;
+	padding-right: 15px;
+	padding-left: 15px;
+	@include media-breakpoint-up("sm") {
+		width: 540px;
+	}
+	@include media-breakpoint-up("md") {
+		width: 720px;
+	}
+	@include media-breakpoint-up("lg") {
+		width: 960px;
+	}
+	@include media-breakpoint-up("xl") {
+		width: 1140px;
+	}
+}
+
+@mixin centered {
+	margin-right: auto;
+	margin-left: auto;
+}
+
+@mixin reset-centered {
+	margin-right: 0;
+	margin-left: 0;
+}
+
+@mixin header-compensation {//add to .common-block if needed, usually for the first section on a page
+	padding-top: $header-height-xs;
+	@include media-breakpoint-up("md") {
+		padding-top: $header-height-md;
+	}
+	@include media-breakpoint-up("lg") {
+		padding-top: $header-height-lg;
+	}
+}
+
+@mixin header-compensation-mob {//add to .common-block if needed on mobile only, usually for the first section on a page or a whole page class
+	@include media-breakpoint-down("sm") {
+		padding-top: $header-height-xs;
+	}
+	
+}
+@mixin section-padding {//add to __content for sections with much content to override default height
+	padding-top: 80px;
+	padding-bottom: 80px;
+	@include media-breakpoint-up("md") {
+		padding-top: 100px;
+		padding-bottom: 100px;
+	}
+	@include media-breakpoint-up("lg") {
+		padding-top: 90px;
+		padding-bottom: 90px;
+	}
+}
+
+@mixin section-padding-mob {//except LG-up
+	padding-top: 80px;
+	padding-bottom: 80px;
+	@include media-breakpoint-up("md") {
+		padding-top: 120px;
+		padding-bottom: 120px;
+	}
+	@include media-breakpoint-up("lg") {
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+}
+
+@mixin last-block-padding-bottom {//add to .common-block, additional padding, overrides common padding
+	padding-bottom: 100px !important;
+	@include media-breakpoint-up("lg") {
+		padding-bottom: 150px !important;
+	}
+}
+
+@mixin common-block-height {
+	min-height: 700px;
+	@include media-breakpoint-up("sm") {
+		min-height: 800px;
+	}
+	@include media-breakpoint-up("lg") {
+		min-height: 100vh;
+		// max-height: 1100px;
+	}
+}
+
+@mixin common-block-height-reduced {
+	min-height: 700px;
+	@include media-breakpoint-up("sm") {
+		min-height: 800px;
+	}
+	@include media-breakpoint-up("md") {
+		min-height: calc(100vh - #{$footer-height-lg});
+		// min-height: 100vh;
+		// max-height: 1100px;
+	}
+}
+
+
+
+/////////////////////////
+// Common elements
+
+@mixin default-bg-light {
+	background: url("images/block-bg-light.svg") center/cover no-repeat;
+}
+
+@mixin default-bg-dark {
+	background: url("images/block-bg-dark.svg") center/cover no-repeat;
+}
+
+@mixin default-bg-gray {
+	background: url("images/block-bg-gray.svg") center/cover no-repeat;
+}
+
+@mixin coral-peach-gradient {
+	background-image: linear-gradient(90.03deg, #FA7D48 0.02%, #F05850 58.64%);
+}
+@mixin coral-peach-gradient-hover {
+	background-image: linear-gradient(90.03deg, #F05850 6.59%, #FA7D48 84.58%);
+}
+@mixin coral-shadow {
+	box-shadow: 0 20px 60px -14px rgba(240, 88, 80, 0.8);
+}
+
+@mixin peach-shadow-text {
+	text-shadow: 0 0 15px rgba(226, 111, 69, 0.8);
+}
+
+@mixin hover-transition {
+	transition: all .2s ease-in;
+}
+
+@mixin text-extra {
+	font-weight: 900;
+	font-size: 2.5em;//40px
+	@include media-breakpoint-up("md") {
+		font-size: 4.5em;//72px
+	}
+	@include media-breakpoint-up("lg") {
+		font-size: 5.938em;//95px
+	}
+}
+@mixin text-mid {
+	font-weight: 700;
+	font-size: 1.125em;//18px
+	line-height: 1.3;
+	@include media-breakpoint-up("md") {
+		font-size: 1.5em;//24px
+	}
+	@include media-breakpoint-up("lg") {
+		font-size: 1.875em;//30px
+	}
+}
+@mixin text-big {
+	font-weight: 900;
+	font-size: 1.5em;//24px
+	line-height: 1.1;
+	@include media-breakpoint-up("md") {
+		font-size: 1.5em;//24px
+	}
+	@include media-breakpoint-up("lg") {
+		font-size: 2.25em;//36px
+	}
+}
+
+// Nice coral button
+@mixin colored-button {//used once in form plugin overrides, copied from .btn
+	position: relative;
+	display: inline-block;
+	padding: 28px 30px;
+	text-align: center;
+	font-size: 1.063em;//17px
+	line-height: 1;
+	font-weight: 900;
+	text-decoration: none;
+	text-transform: uppercase;
+	white-space: nowrap;
+	letter-spacing: 2px;
+	border-radius: 5px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	outline: none !important;
+	opacity: 1;
+	& span {
+		position: relative;
+		z-index: 2;
+	}
+	color: $white;
+	@include coral-peach-gradient;
+	@include coral-shadow;
+	border: none !important;
+	&:before {
+		@include coral-peach-gradient-hover;
+		content: "";
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		z-index: -1;
+		opacity: 0;
+		border-radius: 5px;
+		transition: all .3s ease-in;
+	}
+	&:hover:before {
+		opacity: 1;
+		z-index: 1;
+		box-shadow: 0px 17px 60px -18px #F05850;
+	}
+}
+
+
+
+// Nice bullets for lists
+@mixin listBullets {
+	& li {
+		position: relative;
+		padding-left: 37px;
+		&:before {
+			content: "";
+			position: absolute;
+			width: 60px;
+			height: 60px;
+			left: -15px;
+			top: -15px;
+		}
+		&:nth-child(1n):before,
+		&:nth-child(4n):before {
+			background: url("images/icons/bullet-01.svg") center/contain no-repeat;
+		}
+		&:nth-child(2n):before,
+		&:nth-child(3n):before {
+			background: url("images/icons/bullet-02.svg") center/contain no-repeat;
+		}
+		&:nth-child(3n):before,
+		&:nth-child(4n):before {
+			transform: rotate(180deg);
+		}
+	}
+}
+
+// Nice numbers for lists (1-4)
+@mixin listNumbers {
+	position: relative;
+	&:before {
+		content: "";
+		position: absolute;
+		width: 240px;
+		height: 240px;
+		left: 0px;
+		top: -120px;
+		z-index: -1;
+	}
+	&:nth-child(1):before {
+		background: url("images/number-01.svg") center/cover no-repeat;
+	}
+	&:nth-child(2):before {
+		background: url("images/number-02.svg") center/cover no-repeat;
+	}
+	&:nth-child(3):before {
+		background: url("images/number-03.svg") center/cover no-repeat;
+	}
+	&:nth-child(4):before {
+		background: url("images/number-04.svg") center/cover no-repeat;
+	}
+}
+
+//coral lines on p items
+@mixin itemsLines {
+	& p {
+		position: relative;
+		&:before {
+			content: "";
+			display: block;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 20px;
+			height: 100%;
+			border-radius: 10px;
+			background: linear-gradient(180deg, #F05850 16%, #FA7D48 70%);
+			box-shadow: 0px 20px 60px -4px rgba(240, 88, 80, 0.8);//almost like @mixin coral-shadow
+		}
+	}
+}
+
+
+
+// analog of "circle-bg" for some cases
+@mixin coral-circle {
+	content: "";
+	display: block;
+	position: absolute;
+	background: linear-gradient(90deg, rgba(250,126,72,0.9) -3%, rgba(240,87,81,0.9) 100%);
+	box-shadow: 0px 2px 20px rgba(250,126,72,0.5);
+	border-radius: 50%;
+	z-index: 0;//adjust if needed
+}
+
+// Nice circle on elements
+// analog of "coral-circle" for some cases
+@mixin circle-bg {
+	background: url("images/circle.svg") center/contain no-repeat;
+}
+// Nice circle on items' headers
+@mixin circle-bg-on-group {
+	& .wp-block-group {
+		& p:first-child, & h2:first-child {//item title
+			position: relative;
+			&:before {
+				@include coral-circle;
+				width: 140px;
+				height: 140px;
+				z-index: -1;
+				top: -35px;
+				left: -15px;
+				@include media-breakpoint-up("lg") {
+					top: -40px;
+				}
+			}
+		}
+	}
+}
+
+// Big numbers near items - for two items only, you may add more here if needed
+@mixin numbers-bg {
+	position: relative;
+	&:before {
+		position: absolute;
+		top: 0;
+		color: $white;
+		font-family: Arial, sans-serif;
+		font-size: 250px;
+		text-shadow: 10px 10px 45px rgba(0, 0, 0, .3);
+		font-style: normal;
+		font-weight: 900;
+		line-height: normal;
+		z-index: 1;
+		transform: translateY(-50%);
+		@include media-breakpoint-up("md") {
+			top: 50%;
+			font-size: 300px;
+		}
+		@include media-breakpoint-up("lg") {
+			font-size: 400px;
+		}
+	}
+	&:first-of-type:before {
+		content: "1";
+		left: -15px;
+		@include media-breakpoint-up("md") {
+			left: -30px;
+		}
+	}//1
+	&:last-of-type:before {
+		content: '2';
+		left: -5px;
+		@include media-breakpoint-up("md") {
+			left: -50px;
+		}
+	}//2
+}
+

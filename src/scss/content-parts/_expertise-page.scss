@@ -1,0 +1,425 @@
+// styles for all sections of Expertise page
+//(10 sections! be careful with wp-groups & their classes & IDs)
+
+// whole page itself, class is added to "page-class" acf field
+.expertise-page {
+	@include header-compensation;
+	background-color: $darkblue;//for all except .top-board
+	position: relative;
+	&:after {//small additional bg circle for 1st section, nowhere else to put it :(
+		@include media-breakpoint-up("lg") {
+			@include coral-circle;
+			width: 70px;
+			height: 70px;
+			top: 99vh;
+			right: 5%;
+			z-index: 10;
+		}//lg
+		@include media-breakpoint-up("xl") {
+			top: 96vh;
+		}
+	}
+	& .common-block {
+		color: $white;//for all except .top-board
+		@include section-padding;
+	}
+	& h1 {
+		text-align: center;
+	}
+
+
+}//expertise-page
+
+
+// All classes below should be added to "Additional CSS class" field of wp-group together with .common-block class (in some sections with .full-width too), "HTML anchor" is also required
+
+// "Our Expertise" group
+.our-expertise {
+	position: relative;
+	h1 {
+		margin-bottom: 60px;
+	}
+	&:before {//main block bg, pseudo used to make layers
+		content: "";
+		display: block;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		z-index: 5;
+		@include media-breakpoint-up("md") {
+			@include default-bg-dark;
+		}
+	}// main bg
+
+	&:after {//additional block img, see also a small element in .expertise-page:after
+		content: "";
+		background: url("images/expertise-intro.png") center/contain no-repeat;
+		display: block;
+		position: absolute;
+		width: 100%;
+		height: 500px;
+		right: 0;
+		bottom: -200px;
+		z-index: 0;
+		@include media-breakpoint-up("lg") {
+			width: 450px;
+			height: 450px;
+			right: -150px;
+			bottom: 0;
+		}
+		@include media-breakpoint-up("xl") {
+			right: -100px;
+		}
+		@include media-breakpoint-up-xxl {
+			right: 0;
+		}
+	}// img
+
+	#{$wp-group-inner} {//immediate items container
+		position: relative;
+		z-index: 10;//be above bg & img
+		margin-bottom: 170px;//to accomodate bg
+		padding-left: 10%;
+		padding-right: 10%;
+		@include media-breakpoint-up("lg") {
+			padding-left: 5%;
+			padding-right: 0;
+			margin-bottom: 0;
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			grid-template-rows: repeat(4, auto);
+			grid-column-gap: 130px;
+			grid-auto-flow: column;
+		}//lg
+		@include media-breakpoint-up-xxl {
+			padding-left: 8%;
+		}
+		
+		p {//item, looks like h2, .items-with-lines is added in admin
+			text-transform: uppercase;
+			@include text-big;
+			margin-bottom: 40px;
+			padding-left: 40px;//to accomodate coral lines
+			&:last-child:before {//fix for the last item
+				@include media-breakpoint-up("lg") {
+					height: 80%;
+				}
+				@include media-breakpoint-up("xl") {
+					height: 60%;
+				}
+				@include media-breakpoint-up-xxl {
+					height: 50%;
+				}
+			}//end fix
+		}//item
+	}
+
+}//our-expertise
+
+/////////////////////////////
+// "Top management and ..." group
+.top-board {
+	background-color: $white;
+	&.common-block {
+		color: $black;
+	}
+	&:before {//main block bg, pseudo used to make layers
+		content: "";
+		display: block;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		z-index: 0;
+		@include media-breakpoint-up("md") {
+			@include default-bg-light;
+		}
+	}// main bg
+
+	& h1 {
+		margin-bottom: 60px;
+		@include media-breakpoint-up("lg") {
+			margin-bottom: 100px;
+		}
+	}
+	& h1 + #{$wp-group-inner} {//items container
+		@include media-breakpoint-up("lg") {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			grid-template-rows: 1fr 1fr;
+			grid-column-gap: 100px;
+			grid-auto-flow: column;
+		}
+		& p {//item
+			break-inside: avoid;//!
+			font-weight: 700;
+			padding-left: 150px;
+			margin-bottom: 70px;
+			max-width: 500px;
+			@include centered;
+			@include listNumbers;
+			@include media-breakpoint-up("lg") {
+				@include reset-centered;
+				padding-left: 120px;
+				margin-bottom: 100px;
+			}
+			@include media-breakpoint-up("xl") {
+				padding-left: 150px;
+			}
+			&:before {//listNumbers overrides
+				z-index: 0;
+				top: -15px;
+				left: 15px;
+				width: 120px;
+				height: 120px;
+				@include media-breakpoint-up("lg") {
+					top: -25px;
+				}
+			}
+		}
+	}
+
+}//top-board
+
+/////////////////////////////
+// "Expertise of our portfolio companies" groups
+// consists of 2 full-width sections .first & .second
+.expertise-portfolio {
+	&:before {//main block bg, pseudo used to make layers
+		content: "";
+		display: block;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		z-index: 5;
+		@include media-breakpoint-up("lg") {
+			@include default-bg-dark;
+		}
+	}// main bg
+
+	& h1 {
+		margin-bottom: 60px;
+		flex: 0 0 100%;
+		position: relative;
+		z-index: 10;//be above bg & nums
+		@include media-breakpoint-up("lg") {
+			margin-bottom: 80px;
+		}
+		@include media-breakpoint-up("xl") {
+			white-space: nowrap;
+		}
+
+	}
+
+	& > #{$wp-inner} {//items container
+		position: relative;
+		@include media-breakpoint-up("lg") {
+			display: flex;
+			flex-flow: row;
+			flex-wrap: wrap;
+			justify-content: flex-start;
+		}
+		& > #{$wp-group} {//item
+			// outline: 1px dotted yellow;
+			position: relative;
+			margin-bottom: 60px;
+			max-width: 400px;
+			@include centered;
+			z-index: 10;//be above bg & nums
+			& ul {
+				padding-left: 30px;
+			}
+			@include media-breakpoint-up("lg") {
+				& ul {
+					padding-left: 0;
+				}
+				@include reset-centered;
+				max-width: none;
+				flex: 0 0 25%;
+				padding-bottom: 120px;//make room for .company
+				padding-right: 30px;
+				margin-bottom: 0;
+				&:first-of-type {
+					margin-left: 25% !important;//make room for num
+				}
+			}//lg
+			@include media-breakpoint-up("xl") {
+				flex: 0 0 23%;
+				&:first-of-type {
+					margin-left: 29% !important;//make room for num
+				}
+			}
+			@include media-breakpoint-up-xxl {
+				// flex: 0 0 23%;
+				&:first-of-type {
+					margin-left: 26% !important;//make room for num
+				}
+			}
+		}//item
+
+		&:before {// big nums on the left
+			@include media-breakpoint-up("lg") {
+				position: absolute;
+				top: 45%;
+				left: 20px;
+				color: $dustblue3;
+				font-size: 460px;
+				font-weight: 900;
+				line-height: 0.5;
+				z-index: 0;
+			}//lg
+			@include media-breakpoint-up("xl") {
+				font-size: 550px;
+				top: 36%;
+				left: 50px;
+			}
+			@include media-breakpoint-up-xxl {
+				left: 0;
+			}
+		}// end big nums
+
+	}//items container
+
+	// big nums on the left
+	@include media-breakpoint-up("lg") {
+		&.first > #{$wp-inner}:before{
+			content: "1";
+		}
+		&.second > #{$wp-inner}:before{
+			content: "2";
+		}
+	}// end big nums
+
+	& .company {
+		background: $dustblue3;
+		padding: 30px;
+		text-align: center;
+		bottom: 0;
+		border-radius: 20px;
+		max-width: 350px;
+		@include centered;
+		@include media-breakpoint-up("lg") {
+			@include reset-centered;
+			position: absolute;
+			width: calc(100% - 30px);//- padding-right
+			max-width: 260px;
+			height: 110px;//fixed
+			padding: 0 30px;
+			text-align: left;
+		}
+		& > #{$wp-inner} {
+			display: flex;//for txt centering
+			flex-flow: column;
+			align-items: center;
+			justify-content: center;
+			height: 100%;
+		}//wp-inner
+		& p {//gradient txt
+			margin-bottom: 0;
+			& a {
+				display: block;
+				font-weight: 900;
+				letter-spacing: 0.5px;
+				@include coral-peach-gradient;
+				@include peach-shadow-text;
+				background-size: 100%;
+				text-decoration: none;
+				background-clip: text;
+				text-fill-color: transparent;
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent; 
+				-moz-background-clip: text;
+				-moz-text-fill-color: transparent;
+				&:hover {
+					@include coral-peach-gradient-hover;
+				}
+			}//a
+			//ie 9-10 fix
+			@media screen and (min-width:0\0) {
+				background-image: none;
+				color: $coral;
+				&:hover {
+					color: $peach;
+				}
+			}//end ie
+		}
+	}//company
+
+	&.first {
+		padding-bottom: 0;//on mob these 2 sections are visually united
+		@include media-breakpoint-up("lg") {
+			padding-bottom: 90px;//default for common-block
+		}
+		&:after {//additional block img, on mob is shown in .second at bottom
+			@include media-breakpoint-up("lg") {
+				content: "";
+				background: url("images/expertise-portf.png") bottom/contain no-repeat;
+				display: block;
+				position: absolute;
+				width: 50%;
+				max-width: 700px;
+				height: 60%;
+				right: -25%;
+				bottom: 20%;
+				z-index: 0;
+			}
+			@include media-breakpoint-up("xl") {
+				right: -20%;
+				bottom: 15%;
+			}
+			@include media-breakpoint-up-xxl {
+				right: -5%;
+				bottom: 20%;
+			}
+		}// img
+
+	}//first
+
+	&.second {
+		padding-bottom: 270px;//to accomodate img
+		padding-top: 0;//on mob these 2 sections are visually united
+		& h1 {display: none;}
+		&:after {//additional block img
+			content: "";
+			display: block;
+			position: absolute;
+			background: url("images/expertise-portf.png") bottom/contain no-repeat;
+			right: 0;
+			left: 50%;
+			bottom: -120px;
+			margin-left: -180px;
+			width: 420px;
+			height: 420px;
+		}//block img
+		@include media-breakpoint-up("sm") {
+			&:after {//img
+				bottom: -230px;
+				margin-left: -260px;
+				width: 580px;
+				height: 580px;
+			}//img
+		}//sm
+		@include media-breakpoint-up("lg") {
+			padding-top: 90px;//default for common-block
+			padding-bottom: 90px;//default
+			& h1 {display: block;}
+			&:after {
+				background: url("images/turnkey-img-right.png") bottom/contain no-repeat;
+				width: 45%;
+				height: 55%;
+				bottom: 0;
+				margin-left: 0;
+				left: auto;
+				right: -15%;
+				z-index: 0;
+			}//img
+		}//lg
+
+	}//second
+
+}//expertise-portfolio

@@ -1,0 +1,54 @@
+// September, 29, 2020 by @eternalduck
+// adds outlines and breakpoint info for dev convenience
+
+div[class*="col"] {outline: 1px dashed pink;}
+//wp tweak
+// html{margin-top: 0 !important;}
+// #wpadminbar{display:none}
+//end wp tweak
+body:before {
+	position: fixed;
+	top: 5px;
+	right: 5px;
+	font-size: 14px;
+	z-index: 999999;
+}
+
+body:before {
+	content: "XS (before 576)";
+	color: cyan;
+}
+@include media-breakpoint-up("sm") {
+	body:before {
+		content: "SM (min-width: 576; content: 540)";
+		color: #777;
+	}
+}
+@include media-breakpoint-up("md") {
+	body:before {
+		content: "MD (min-width: 768; content: 720)";
+		color: blue;
+	}
+
+}
+@include media-breakpoint-up("lg") {
+	body:before {
+		content: "LG (min-width: 992; content: 960)";
+		color: lime;
+	}
+
+}
+@include media-breakpoint-up("xl") {
+	body:before {
+		content: "XL (min-width: 1200; content: 1140)";
+		color: #000;
+	}
+
+}
+
+@include media-breakpoint-up-xxl {
+	body:before {
+		content: "XXL (min-width: 1456; content: 1140)";
+		color: #999;
+	}
+}

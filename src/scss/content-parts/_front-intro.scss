@@ -1,0 +1,94 @@
+// styles for Template Name: Block: Front Intro
+
+.front-intro {
+	@include header-compensation;
+	overflow: hidden;
+	position: relative;
+	padding-bottom: 150px;
+	@include media-breakpoint-up("sm") {
+		padding-bottom: 160px;
+	}
+	@include media-breakpoint-up("lg") {
+		padding-bottom: 0;
+	}
+	& h1 {
+		margin-top: 3%;
+		margin-bottom: 30px;
+		@include text-extra;
+		@include media-breakpoint-up("lg") {
+			line-height: 1;
+		}
+	}
+	& h1 + p {
+		@include text-mid;
+		@include centered;
+		width: 70%;
+		@include media-breakpoint-up("md") {
+			&:lang(en) {//only for en
+				white-space: nowrap;
+			}
+		}
+	}
+	& p + h2 {
+		margin-top: 60px;
+		margin-bottom: 30px;
+	}
+	& .btn {
+		margin: 20px auto 80px;
+		@include media-breakpoint-up("lg") {
+			margin: 5px auto 50px;
+			
+		}
+	}
+	& .menu-social {
+		width: 100px;
+		margin: 0 auto;
+	}
+
+	&__img {//2 imgs sit in __content
+		position: absolute;
+		bottom: -120px;
+		&_left {
+			max-width: 65%;
+			left: -21%;
+		}
+		&_right {
+			max-width: 50%;
+			right: -16%;
+		}
+		@include media-breakpoint-up("md") {
+			&_left {
+				max-width: 75%;
+				bottom: -330px;
+				left: -37%;
+			}
+			&_right {
+				max-width: 60%;
+				bottom: -300px;
+				right: -26%;
+			}
+		}//md
+		@include media-breakpoint-up("lg") {
+			bottom: auto;
+			max-width: initial;
+			&_left {
+				width: 850px;
+				top: 8%;
+				left: -670px;
+			}
+			&_right {
+				width: 700px;
+				top: -1%;
+				right: -570px;
+			}
+		}//lg
+		@include media-breakpoint-up("xl") {
+			&_left {
+				left: -600px;
+			}
+			&_right {
+				right: -500px;
+			}
+		}//xl
+	}
+}

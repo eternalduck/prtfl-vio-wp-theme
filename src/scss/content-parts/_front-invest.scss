@@ -1,0 +1,91 @@
+// styles for "We Invest" section,
+// it uses Template Name: Block
+// class is added to "page-class" acf field
+
+// styles are similar to .six-items but here there're 5
+
+.front-invest {
+	@include last-block-padding-bottom;
+	@include media-breakpoint-up("md") {
+		text-align: center;
+	}
+	& h1 {
+		margin-bottom: 5px;
+	}
+	& h1 + p {//first p
+		@include text-mid;
+		margin-bottom: 85px;
+	}
+	& .btn {
+		@include centered;
+	}
+
+	& p + #{$wp-group-inner} {//content
+		@include circle-bg-on-group;//item title bg circle
+		@include media-breakpoint-up("md") {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			text-align: center;
+			justify-content: space-between;
+		}
+
+		& > .wp-block-group {//item
+			position: relative;
+			text-align: left;
+			width: 100%;
+			margin-bottom: 60px;
+			@include media-breakpoint-up("md") {
+				width: 32%;
+				&:nth-child(4), &:nth-child(5) {
+					margin-bottom: 40px;
+					width: 47%;
+					& ul {width: 80%;}
+				}
+				
+			}//md
+			@include media-breakpoint-up-xxl {//min-width: 1455px
+				width: 18%;
+				margin-bottom: 0;
+				&:nth-child(4), &:nth-child(5) {
+					margin-bottom: 0;
+					width: 18%;
+					& ul {width: 100%;}
+				}
+			}//xxl
+
+			& ul {
+				margin-bottom: 0;
+			}
+
+
+		}//item
+
+		& h2 {//item title
+			@include media-breakpoint-up("lg") {
+				min-height: 60px;//fixed header
+				font-size: 32px;//smaller that usual h2
+				&:lang(ru), //rus & ua versions
+				&:lang(uk) {
+					font-size: 26px;
+				}
+			}//lg
+			@include media-breakpoint-up("xl") {
+				font-size: 34px;
+				&:lang(ru), //rus & ua versions
+				&:lang(uk) {
+					font-size: 30px;
+				}
+			}//xl
+			@include media-breakpoint-up-xxl {
+				font-size: 33px;
+				&:lang(ru), //rus & ua versions
+				&:lang(uk) {
+					font-size: 26px;
+				}
+			}//xxl
+		}//h2
+	}//content flex container
+
+
+}
